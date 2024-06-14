@@ -3,18 +3,22 @@ process.env.BABEL_ENV = 'production';
 process.env.NODE_ENV = 'production';
 process.env.ASSET_PATH = '/';
 
-const webpack = require('webpack');
-const config = require('../webpack.config');
+try {
+  const webpack = require('webpack');
+  const config = require('../webpack.config');
 
-delete config.chromeExtensionBoilerplate;
+  delete config.chromeExtensionBoilerplate;
 
-config.mode = 'production';
+  config.mode = 'production';
 
-webpack(config, function (err, stats) {
-  if (err) {
-    console.error('Webpack build error:', err);
-    throw err;
-  }
-  console.log(stats.toString({ colors: true }));
-});
-
+  webpack(config, function (err, stats) {
+    if (err) {
+      console.error('Webpack build error:', err);
+      throw err;
+    }
+    console.log(stats.toString({ colors: true }));
+  });
+} catch (error) {
+  console.error('Build script error:', error);
+  process.exit(1);
+}
