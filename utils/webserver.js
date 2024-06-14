@@ -1,5 +1,6 @@
 // Set the correct environment variables
-process.env.BABEL_ENV = process.env.NODE_ENV || 'development';
+process.env.BABEL_ENV = 'development';
+process.env.NODE_ENV = 'development';
 process.env.ASSET_PATH = '/';
 
 const path = require('path');
@@ -32,6 +33,7 @@ if (process.env.NODE_ENV === 'development') {
     {
       https: false,
       hot: true,
+      client: false,
       host: '0.0.0.0', // bind to all interfaces
       port: env.PORT || 3000, // use the PORT environment variable
       static: {
@@ -58,7 +60,7 @@ if (process.env.NODE_ENV === 'development') {
   // Serve static files from the 'build' directory
   app.use(express.static(path.join(__dirname, '../build')));
 
-  // Serve the main HTML file for the root URL
+  // Serve the main HTML file for the root URL and all other routes
   app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '../build', 'newtab.html'));
   });
