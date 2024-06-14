@@ -248,4 +248,6 @@ if (env.NODE_ENV === 'development') {
   };
 }
 
+console.log('Webpack options:', JSON.stringify(options, null, 2));
+
 module.exports = options;
