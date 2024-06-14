@@ -34,7 +34,7 @@ const server = new WebpackDevServer(
     https: false,
     hot: false,
     client: false,
-    host: 'localhost',
+    host: '0.0.0.0', // Change this line to bind to all network interfaces
     port: env.PORT,
     static: {
       directory: path.join(__dirname, '../build'),
