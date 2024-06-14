@@ -15,6 +15,7 @@
     "build:prod-firefox": "yarn build:firefox && cross-env BROWSER=firefox yarn build:zip",
     "dev": "node utils/webserver.js",
     "dev:firefox": "cross-env BROWSER=firefox yarn dev",
+    "start": "node utils/webserver.js",
     "prettier": "prettier --write '**/*.{js,jsx,css,html}'",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore ."
   },
