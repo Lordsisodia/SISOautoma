@@ -3,8 +3,10 @@ process.env.NODE_ENV = 'production';
 process.env.ASSET_PATH = '/';
 
 try {
-  const webpack = require('webpack'); // Add /* eslint-disable-line global-require */
-  const config = require('../webpack.config'); // Add /* eslint-disable-line global-require */
+  console.log('Attempting to require webpack...');
+  const webpack = require('webpack');
+  console.log('Webpack successfully required.');
+  const config = require('../webpack.config');
 
   delete config.chromeExtensionBoilerplate;
 
@@ -12,12 +14,12 @@ try {
 
   webpack(config, function (err, stats) {
     if (err) {
-      console.error('Webpack build error:', err); // Add /* eslint-disable-line no-console */
+      console.error('Webpack build error:', err);
       throw err;
     }
-    console.log(stats.toString({ colors: true })); // Add /* eslint-disable-line no-console */
+    console.log(stats.toString({ colors: true }));
   });
 } catch (error) {
-  console.error('Build script error:', error); // Add /* eslint-disable-line no-console */
+  console.error('Build script error:', error);
   process.exit(1);
 }
