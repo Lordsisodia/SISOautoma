@@ -1,4 +1,4 @@
-// Do this as the first thing so that any code reading it knows the right env.
+// Set the correct environment variables
 process.env.BABEL_ENV = process.env.NODE_ENV || 'development';
 process.env.ASSET_PATH = '/';
 
@@ -31,16 +31,14 @@ if (process.env.NODE_ENV === 'development') {
   const server = new WebpackDevServer(
     {
       https: false,
-      hot: false,
-      client: false,
+      hot: true,
       host: '0.0.0.0', // bind to all interfaces
       port: env.PORT || 3000, // use the PORT environment variable
       static: {
         directory: path.join(__dirname, '../build'),
       },
       devMiddleware: {
-        publicPath: `http://localhost:${env.PORT}/`,
-        writeToDisk: true,
+        publicPath: '/',
       },
       headers: {
         'Access-Control-Allow-Origin': '*',
@@ -49,10 +47,6 @@ if (process.env.NODE_ENV === 'development') {
     },
     compiler
   );
-
-  if (module.hot) {
-    module.hot.accept();
-  }
 
   (async () => {
     await server.start();
@@ -66,7 +60,7 @@ if (process.env.NODE_ENV === 'development') {
 
   // Serve the main HTML file for the root URL
   app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../build', 'index.html'));
+    res.sendFile(path.join(__dirname, '../build', 'newtab.html'));
   });
 
   app.listen(PORT, '0.0.0.0', () => {
